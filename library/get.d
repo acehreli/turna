@@ -7,6 +7,7 @@ module library.get;
 
 import std.process; //  getenv
 import std.string;
+import library.convertToUTF8;
 
 /*
  * BUG: 
@@ -19,8 +20,9 @@ string[string] get()
 {
     string[string] endGet;
     string get = getenv("QUERY_STRING");
-
-    endGet=fixedString(get);
+    string fixedStr=convertToUTF8(get);
+    
+    endGet=fixedString(fixedStr);
  
     
     
