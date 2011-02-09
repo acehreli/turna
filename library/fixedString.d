@@ -2,29 +2,37 @@ module library.fixedString;
 
 import std.string;
 
-string[string] fixedString(string get)
+/*
+ * BUG: 
+ * 
+ * fixedString is very slow. Because we used "~=" operator in fixedString function.
+ * 
+ */
+
+
+string[string] fixedString(string input)
 {
-    get= replace(get, "+", " ");
-    string[string] endGet;
+    input= replace(input, "+", " ");
+    string[string] endInput;
 
-    string[] fixedGet1=split(get, "&"); //
+    string[] fixedInput1=split(input, "&"); //
 
-    string[][] fixedGet2;
+    string[][] fixedInput2;
 
-    foreach(fixedGet;fixedGet1) {
+    foreach(fixedInput;fixedInput1) {
 
-        fixedGet2~=split(fixedGet,"=");        
+        fixedInput2~=split(fixedInput,"=");        
         
     }
     
-    for(int a=0;a<fixedGet1.length;++a) {
-        for(int b=1;b<fixedGet2[a].length;++b) {
-            //endGet[fixedGet2[a][0]]~=fixedGet2[a][b+1];
-            endGet[fixedGet2[a][0]]~=fixedGet2[a][b];
+    for(int a=0;a<fixedInput1.length;++a) {
+        for(int b=1;b<fixedInput2[a].length;++b) {
+            //endInput[fixedInput2[a][0]]~=fixedInput2[a][b+1];
+            endInput[fixedInput2[a][0]]~=fixedInput2[a][b];
         }                
     }
     
-    return endGet;
+    return endInput;
 }
 unittest
 {

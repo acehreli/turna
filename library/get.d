@@ -10,12 +10,7 @@ import std.string;
 import library.convertToUTF8;
 import library.fixedString;
 
-/*
- * BUG: 
- * 
- * get is very slow. Because we used "~=" operator in fixedString function.
- * 
- */
+
 
 string[string] get()
 {
