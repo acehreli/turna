@@ -5,11 +5,13 @@
 
 module library.post;
 
-import library.convertToUTF8;
+//import library.convertToUTF8;
 import library.fixedString;
 import std.process;
 import std.cstream;
 import std.conv;
+import std.uri;
+
 /*
  * BUG:
  * 
@@ -28,9 +30,8 @@ string[string] post()
  
     }
     
-    string fixedStr=convertToUTF8(to!(string)(firstPost));
     
-    endPost=fixedString(fixedStr);
+    endPost=fixedString(decode(to!(string)(firstPost)));
     
     
     return endPost;    

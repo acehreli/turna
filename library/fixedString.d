@@ -38,7 +38,7 @@ unittest
 {
     string[string] deneme;
     
-    deneme=fixedString("hayvan=at&derece=Orta&sevilen+hayvan=ğüsçü&ikinci+d%C3%BC%C4%9Fme=Ba%C5%9Fka+D%C3%BC%C4%9Fme");
+    deneme=fixedString("hayvan=at&derece=Orta&sevilen+hayvan=ğüşçü&ikinci+d%C3%BC%C4%9Fme=Ba%C5%9Fka+D%C3%BC%C4%9Fme");
     assert(deneme["hayvan"]=="at");
     assert(deneme["sevilen hayvan"]=="ğüşçü");
 
