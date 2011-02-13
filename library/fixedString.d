@@ -43,3 +43,39 @@ unittest
     assert(deneme["sevilen hayvan"]=="ğüşçü");
 
 }
+ 
+
+string[string] fixedStringForCookie(string input)
+{
+    string[string] endInput;
+
+    string[] fixedInput1=split(input, "; "); //
+
+    string[][] fixedInput2;
+
+    foreach(fixedInput;fixedInput1) {
+
+        fixedInput2~=split(fixedInput,"=");        
+        
+    }
+    
+    for(int a=0;a<fixedInput1.length;++a) {
+        for(int b=1;b<fixedInput2[a].length;++b) {
+            //endInput[fixedInput2[a][0]]~=fixedInput2[a][b+1];
+            endInput[fixedInput2[a][0]]~=fixedInput2[a][b];
+        }                
+    }
+    
+    return endInput;
+}
+
+unittest
+{
+    string[string] deneme;
+    
+    deneme=fixedStringForCookie("deneme=lalala; olala olalala=passaporala ekranlarda");
+    assert(deneme["deneme"]=="lalala");
+    assert(deneme["olala olalala"]=="passaporala ekranlarda");
+
+}
+ 
