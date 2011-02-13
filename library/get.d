@@ -8,7 +8,6 @@ module library.get;
 import std.process; //  getenv
 import std.string;
 //import library.convertToUTF8;
-import std.uri;
 import library.fixedString;
 
 
@@ -19,7 +18,7 @@ string[string] get()
     string get = getenv("QUERY_STRING");
   
     
-    endGet=forGetAndPost(decode(get)); //fixedString.forGetAndPost
+    endGet=forGetAndPost(get); //fixedString.forGetAndPost
  
     
     

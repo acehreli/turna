@@ -10,7 +10,6 @@ import library.fixedString;
 import std.process;
 import std.cstream;
 import std.conv;
-import std.uri;
 
 /*
  * BUG:
@@ -32,7 +31,7 @@ string[string] post()
     }
     
     
-    endPost=forGetAndPost(decode(to!(string)(firstPost)));//fixedString.forGetAndPost
+    endPost=forGetAndPost(to!(string)(firstPost));//fixedString.forGetAndPost
     
     
     return endPost;    

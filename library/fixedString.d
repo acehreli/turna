@@ -1,6 +1,7 @@
 module library.fixedString;
 
 import std.string;
+import std.uri;
 
 /*
  * BUG: 
@@ -13,6 +14,7 @@ import std.string;
 
 string[string] forGetAndPost(string input)
 {
+    input= decode(input);
     input= replace(input, "+", " ");
     string[string] endInput;
 
@@ -39,9 +41,9 @@ unittest
 {
     string[string] deneme;
     
-    deneme=fixedString("hayvan=at&derece=Orta&sevilen+hayvan=ğüşçü&ikinci+d%C3%BC%C4%9Fme=Ba%C5%9Fka+D%C3%BC%C4%9Fme");
+    deneme=forGetAndPost("hayvan=at&derece=Orta&ikinci+d%C3%BC%C4%9Fme=Ba%C5%9Fka+D%C3%BC%C4%9Fme");
     assert(deneme["hayvan"]=="at");
-    assert(deneme["sevilen hayvan"]=="ğüşçü");
+    assert(deneme["ikinci düğme"]=="Başka Düğme");
 
 }
  
@@ -74,7 +76,7 @@ unittest
 {
     string[string] deneme;
     
-    deneme=fixedStringForCookie("deneme=lalala; olala olalala=passaporala ekranlarda");
+    deneme=forCookie("deneme=lalala; olala olalala=passaporala ekranlarda");
     assert(deneme["deneme"]=="lalala");
     assert(deneme["olala olalala"]=="passaporala ekranlarda");
 
