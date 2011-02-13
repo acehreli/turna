@@ -13,14 +13,13 @@ import library.fixedString;
 import std.conv;
 import std.cstream;
 
-string cookie()
+string[string] cookie()
 {
-    string endCookie;
+    string[string] endCookie;
     string cookie = getenv("HTTP_COOKIE");
   
     
-    //endCookie=fixedStringForCookie(decode(cookie));
-    endCookie=decode(cookie);
+    endCookie=fixedStringForCookie(decode(cookie));
     
     
     return endCookie;
