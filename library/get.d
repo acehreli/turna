@@ -19,7 +19,7 @@ string[string] get()
     string get = getenv("QUERY_STRING");
   
     
-    endGet=fixedString(decode(get));
+    endGet=forGetAndPost(decode(get)); //fixedString.forGetAndPost
  
     
     

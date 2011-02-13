@@ -10,7 +10,7 @@ import std.string;
  */
 
 
-string[string] fixedString(string input)
+string[string] forGetAndPost(string input)
 {
     input= replace(input, "+", " ");
     string[string] endInput;
@@ -45,7 +45,7 @@ unittest
 }
  
 
-string[string] fixedStringForCookie(string input)
+string[string] forCookie(string input)
 {
     string[string] endInput;
 

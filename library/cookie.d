@@ -19,7 +19,7 @@ string[string] cookie()
     string cookie = getenv("HTTP_COOKIE");
   
     
-    endCookie=fixedStringForCookie(decode(cookie));
+    endCookie=forCookie(decode(cookie)); //fixedString.forCookie
     
     
     return endCookie;

@@ -31,7 +31,7 @@ string[string] post()
     }
     
     
-    endPost=fixedString(decode(to!(string)(firstPost)));
+    endPost=forGetAndPost(decode(to!(string)(firstPost)));//fixedString.forGetAndPost
     
     
     return endPost;    
