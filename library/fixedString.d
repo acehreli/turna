@@ -5,7 +5,8 @@ import std.string;
 /*
  * BUG: 
  * 
- * fixedString is very slow. Because we used "~=" operator in fixedString function.
+ * fixedString is very slow. Because we used the "~=" operator in the
+ * fixedString function.
  * 
  */
 

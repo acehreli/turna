@@ -1,5 +1,5 @@
 /*
- * This module for get method.
+ * This module is for the post method.
  * 
  * */
 
@@ -15,7 +15,8 @@ import std.uri;
 /*
  * BUG:
  * 
- * post is very slow. Because we used "~=" operator for firsPost variable.
+ * post is very slow. Because we used the "~=" operator for the firstPost
+ * variable.
  * 
  * 
  * */

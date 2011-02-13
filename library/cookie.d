@@ -1,5 +1,5 @@
 /*
- * This module for get method.
+ * This module is for cookie management.
  * 
  * 
 */
@@ -59,7 +59,7 @@ void registerCookie()
 
 
 
-/* I don't know really necessary
+/* I don't know whether this is really necessary
  * 
 void clearCookie(string name, string path = null, string domain = null) {
     string[string] test;

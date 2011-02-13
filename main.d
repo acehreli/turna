@@ -1,5 +1,5 @@
 /*
- * This module for compiled the project
+ * This module is for compiling the project
  * */
 import library.get;
 import library.fixedString;

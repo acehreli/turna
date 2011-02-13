@@ -1,5 +1,5 @@
 /*
- * This module for get method.
+ * This module is for the get method.
  * 
  * */
 
