@@ -59,16 +59,10 @@ void endCookie()
 
 
 
-/* I don't know whether this is really necessary
- * 
+
 void clearCookie(string name, string path = null, string domain = null) {
     string[string] test;
     test=cookie();
     if(name in test)
         setCookie(name, "", 1, path, domain);
-    else
-        throw new Exception("Error: Cookie don't Found");
 }
-
-
-*/
