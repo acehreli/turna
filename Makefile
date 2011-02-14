@@ -2,8 +2,7 @@ SOURCES= \
     main.d \
     library/cookie.d \
     library/fixedString.d \
-    library/get.d \
-    library/post.d \
+    library/envVar.d \
 
 COMPILER = dmd
 
