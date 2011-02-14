@@ -22,7 +22,7 @@ import std.conv;
 string[string] post()
 {
     
-    string[string] endPost;
+    string[string] resultPost;
     char[] firstPost;
     while(firstPost.length<to!int(getenv("CONTENT_LENGTH"))){
         
@@ -31,9 +31,9 @@ string[string] post()
     }
     
     
-    endPost=forGetAndPost(to!(string)(firstPost));//fixedString.forGetAndPost
+    resultPost=forGetAndPost(to!(string)(firstPost));//fixedString.forGetAndPost
     
     
-    return endPost;    
+    return resultPost;    
     
 }

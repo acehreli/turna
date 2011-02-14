@@ -14,13 +14,13 @@ import library.fixedString;
 
 string[string] get()
 {
-    string[string] endGet;
+    string[string] resultGet;
     string get = getenv("QUERY_STRING");
   
     
-    endGet=forGetAndPost(get); //fixedString.forGetAndPost
+    resultGet=forGetAndPost(get); //fixedString.forGetAndPost
  
     
     
-    return endGet;
+    return resultGet;
 }

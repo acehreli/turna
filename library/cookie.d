@@ -15,14 +15,14 @@ import std.cstream;
 
 string[string] cookie()
 {
-    string[string] endCookie;
+    string[string] resultCookie;
     string cookie = getenv("HTTP_COOKIE");
   
     
-    endCookie=forCookie(decode(cookie)); //fixedString.forCookie
+    resultCookie=forCookie(decode(cookie)); //fixedString.forCookie
     
     
-    return endCookie;
+    return resultCookie;
 }
 
 void setCookie(string name, string data, long expiresIn = 0, string path = null, string domain = null, bool httpOnly = false)
@@ -51,7 +51,7 @@ void setCookie(string name, string data, long expiresIn = 0, string path = null,
 
 }
 
-void registerCookie()
+void endCookie()
 {
     std.stdio.writeln();
 }
