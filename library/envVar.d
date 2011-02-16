@@ -12,6 +12,8 @@ import std.conv;
 import std.uri;
 //import library.convertToUTF8;
 import library.fixedString;
+
+
 /*
  * This module is for the get method.
  * 
@@ -27,7 +29,7 @@ string[string] get()
     string get = getenv("QUERY_STRING");
   
     
-    resultGet=forGetAndPost(get); //fixedString.forGetAndPost
+    resultGet = forGetAndPost(get); //fixedString.forGetAndPost
  
     
     
@@ -48,19 +50,22 @@ string[string] post()
     
     string[string] resultPost;
     char[] firstPost;
-    while(firstPost.length<to!int(getenv("CONTENT_LENGTH"))){
+    
+    
+    while (firstPost.length < to!int(getenv("CONTENT_LENGTH"))) {
         
-        firstPost~=din.getc;
+        firstPost ~= din.getc;
  
     }
     
     
-    resultPost=forGetAndPost(to!(string)(firstPost));//fixedString.forGetAndPost
+    resultPost = forGetAndPost(to!(string)(firstPost));//fixedString.forGetAndPost
     
     
     return resultPost;    
     
 }
+
 
 string serverSoftware()
 {
