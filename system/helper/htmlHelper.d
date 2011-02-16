@@ -1,17 +1,11 @@
 module helper;
 import std.stdio;
+import std.conv;
 class HtmlHelper
 {
 
     char[] content;
     char[] head;    
-
-    this(){
-        
-        this.content="";
-        this.head="";
-    
-    }
 
     void htmlTags(){
   
@@ -25,9 +19,9 @@ class HtmlHelper
 
     }
 
-    void createTitle(dchar[] title){
+    void createTitle(const dchar[] title){
   
-        head~="<title>"~title~"</title>";
+        head~="<title>"~to!string(title)~"</title>";
 
     }
 
@@ -78,7 +72,7 @@ class HtmlHelper
 
 }
 
-void main()
+unittest
 {
     HtmlHelper help=new HtmlHelper();
     help.downLine();
@@ -87,7 +81,7 @@ void main()
     help.bolder("Merhaba");
     help.bodyPiece();
     help.createTitle("Merhaba");
-    help.head();
+    // help.head();
     help.htmlTags();
 }
  

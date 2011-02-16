@@ -3,11 +3,12 @@ SOURCES= \
     library/cookie.d \
     library/fixedString.d \
     library/envVar.d \
+    system/helper/htmlHelper.d \
 
 COMPILER = dmd
 
 SWITCHES = -unittest -w
 
-test:
+test: ${SOURCES} Makefile
 	${COMPILER} -of$@ ${SOURCES} ${SWITCHES}
 	./$@
