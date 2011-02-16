@@ -13,19 +13,25 @@ import library.fixedString;
 import std.conv;
 import std.cstream;
 
+
+
 string[string] cookie()
 {
     string[string] resultCookie;
     string cookie = getenv("HTTP_COOKIE");
   
     
-    resultCookie=forCookie(decode(cookie)); //fixedString.forCookie
+    resultCookie = forCookie(decode(cookie)); //fixedString.forCookie
     
     
     return resultCookie;
 }
 
-void setCookie(string name, string data, long expiresIn = 0, string path = null, string domain = null, bool httpOnly = false)
+
+
+
+void setCookie(string name, string data, long expiresIn = 0, 
+               string path = null, string domain = null, bool httpOnly = false)
 {
     
     string[] responseCookies;
@@ -33,23 +39,35 @@ void setCookie(string name, string data, long expiresIn = 0, string path = null,
     string cookie = name ~ "=";
     cookie ~= data;
     string[] hd;
-    if(path !is null)
+    
+    
+    if (path !is null) {
         cookie ~= "; path=" ~ path;
-    if(expiresIn != 0)
+    }
+    
+    if (expiresIn != 0) {
         cookie ~= "; Max-Age=" ~ to!(string)(expiresIn);
-    if(domain !is null)
+    }
+    
+    if (domain !is null) {
         cookie ~= "; domain=" ~ domain;
-    if(httpOnly == true )
+    }
+    
+    if (httpOnly == true) {
         cookie ~= "; HttpOnly";
+    }
     
     responseCookies ~= cookie;
-    foreach(c; responseCookies)
-        hd ~= "Set-Cookie: " ~ c;
     
-    foreach(one;hd)
+    foreach (c; responseCookies) {
+        hd ~= "Set-Cookie: " ~ c;
+    }
+    
+    foreach (one; hd) {
         std.stdio.writeln(one);
-
+    }
 }
+
 
 void endCookie()
 {
@@ -57,12 +75,15 @@ void endCookie()
 }
 
 
-
-
-
 void clearCookie(string name, string path = null, string domain = null) {
+   
     string[string] test;
-    test=cookie();
-    if(name in test)
+    test = cookie();
+   
+    if (name in test) {
         setCookie(name, "", 1, path, domain);
+    } else {
+    //thrown error with standard error of turna. But it yet is not defined standart error of turna.
+    }
+
 }
