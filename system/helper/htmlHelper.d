@@ -7,9 +7,16 @@ class HtmlHelper
     char[] content;
     char[] head;    
 
+    this(){
+
+        this.content=[]; 
+        this.head=[];
+
+    }
+  
     void htmlTags(){
   
-        content~="<html>\n"~content~"</html\n";
+        content="<html>\n"~content~"</html\n";
 
     }
 
@@ -27,7 +34,7 @@ class HtmlHelper
 
     void bodyPiece(){
     
-        content~="<body>\n"~content~"</body>\n";
+        content="<body>\n"~content~"</body>\n";
 
     }
 
@@ -92,8 +99,8 @@ unittest
     help.paragraph("Merhaba");
     help.bolder("Merhaba");
     help.bodyPiece();
-    help.createTitle("Merhaba");
-    //help.head();
     help.htmlTags();
+    help.createTitle("Merhaba");
+    help.headTags();
     writeln(help.content);
 }
