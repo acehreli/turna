@@ -19,9 +19,9 @@ class HtmlHelper
 
     }
 
-    void createTitle(const dchar[] title){
+    void createTitle(const char[] title){
   
-        head~="<title>"~to!string(title)~"</title>";
+        head~="<title>"~to!string(title)~"</title>\n";
 
     }
 
@@ -39,8 +39,8 @@ class HtmlHelper
         case 3: content~="<h3>"~text~"</h3>\n"; break;
         case 4: content~="<h4>"~text~"</h4>\n"; break;
         case 5: content~="<h5>"~text~"</h5>\n"; break;
-        case 6: content~="<h1>"~text~"</h6>\n"; break;
-        default: ;
+        case 6: content~="<h6>"~text~"</h6>\n"; break;
+        default:;
     
         }
 
@@ -70,20 +70,30 @@ class HtmlHelper
 
     }
 
+    void createLink(string address,string name){
+    
+        content~="<a href=\""~address~"\">"~name~"</a>\n";
+
+    }
+
+    void createComment(string comment){
+
+        content~="<!--"~comment~"-->\n";
+
+    }
+
 }
 
 unittest
 {
     HtmlHelper help=new HtmlHelper();
     help.downLine();
-    help.header(1,"Merhaba");
+    //help.header(1,"Merhaba");
     help.paragraph("Merhaba");
     help.bolder("Merhaba");
     help.bodyPiece();
     help.createTitle("Merhaba");
-    // help.head();
+    //help.head();
     help.htmlTags();
+    writeln(help.content);
 }
- 
-
-    
