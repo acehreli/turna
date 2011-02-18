@@ -1,4 +1,4 @@
-module system.helper.htmlHelper;
+module helper;
 import std.stdio;
 import std.conv;
 class HtmlHelper
@@ -44,7 +44,7 @@ class HtmlHelper
 
     }
 
-    void header(int level,const char[] text){
+    void header(int level,string text){
 
         switch(level){
         case 1: content~="<h1>"~text~"</h1>\n"; break;
@@ -65,13 +65,13 @@ class HtmlHelper
 
     }
 
-    void paragraph(const char[] text){
+    void paragraph(string text){
 
         content~="<p>"~text~"</p>\n";
 
     }
 
-    void bolder(const char[] text){
+    void bolder(string text){
   
         content~="<b>"~text~"</b>\n";
 
@@ -83,81 +83,154 @@ class HtmlHelper
 
     }
 
-    void createLink(const char[] address,const char[] name){
+    void createLink(string address,string name){
     
         content~="<a href=\""~address~"\">"~name~"</a>\n";
 
     }
 
-    void createComment(const char[] comment){
+    void createComment(string comment){
 
         content~="<!--"~comment~"-->\n";
 
     }
 
-    void bigger(const char[] text){
+    void bigger(string text){
     
         content~="<big>"~text~"</big>\n";
 
     }
 
-    void emphasized(const char[] text){
+    void emphasized(string text){
 
         content~="<em>"~text~"</em>\n";
 
     }
 
-    void italic(const char[] text){
+    void italic(string text){
 
         content~="<i>"~text~"</i>\n";
 
     }
 
-    void smaller(const char[] text){
+    void smaller(string text){
 
         content~="<small>"~text~"</small>\n";
 
     }
 
-    void stronger(const char[] text){
+    void stronger(string text){
 
         content~="<strong>"~text~"</strong>\n";
 
     }
 
-    void subscripted(const char[] text){
+    void subscripted(string text){
 
         content~="<sub>"~text~"</sub>\n";
 
     }
 
-    void superscripted(const char[] text){
+    void superscripted(string text){
  
         content~="<sup>"~text~"</sup>\n";
 
     }
 
-    void inserted(const char[] text){
+    void inserted(string text){
 
         content~="<ins>"~text~"</ins>\n";
 
     }
 
-    void deleted(const char[] text){
+    void deleted(string text){
 
         content~="<del>"~text~"</del>\n";
 
     }
 
-    void definitionTerm(const char[] text){
+    void definitionTerm(string text){
 
         content~="<dfn>"~text~"</dfn>\n";
 
     }
 
-    void codeStyle(const char[] text){
+    void codeStyle(string text){
 
         content~="<code>"~text~"</code>\n";
+
+    }
+
+    void keyboardText(string text){
+
+        content~="<kbd>"~text~"</kbd>\n";
+
+    }
+
+    void sample(string text){
+  
+        content~="<samp>"~text~"</samp>\n";
+
+    }
+
+    void teleType(string text){
+
+        content~="<tt>"~text~"</tt>\n";
+ 
+    }
+
+    void variable(string text){
+
+        content~="<var>"~text~"</var>\n";
+
+    }
+
+    void preformatted(string text){
+
+        content~="<pre>"~text~"</pre>\n";
+
+    }
+
+    void abbreviated(string text,string longer){
+
+        content~="<abbr title="~longer~">"~text~"</abbr>\n";
+
+    }
+
+    void acronym(string headCharacters,string text){
+
+        content~="<acronym title="~text~">"~headCharacters~"</acronym>\n";
+
+    }
+
+    void bidirectional(int direction,string text){
+
+        if(direction==0){
+ 
+            content~="<bdo dir=\"rtl\">"~text~"</bdo>\n";
+
+        }else{
+
+            content~="<bo dir=\"ltr\">"~text~"</bdo>\n";
+
+        }
+    }
+
+    void longQuote(string text){
+
+        content~="<blockquote>"~text~"</blockquote>\n";
+
+    }
+
+    void shortQuote(string text){
+
+        content~="<q>"~text~"</q>\n";
+
+    }
+
+    void citation(string text){
+
+        content~="<cite>"~text~"</cite>\n";
 
     }
 
@@ -179,6 +252,17 @@ unittest
     help.superscripted("Merhaba");
     help.inserted("Merhaba");
     help.deleted("Merhaba");
+    help.keyboardText("Merhaba");
+    help.sample("Merhaba");
+    help.teleType("Merhaba");
+    help.variable("Merhaba");
+    help.preformatted("Merhaba");
+    help.abbreviated("Mrb","Merhaba");
+    help.acronym("MD","Merhaba D");
+    help.bidirectional(0,"Merhaba");
+    help.longQuote("Merhaba");
+    help.shortQuote("Merhaba");
+    help.citation("Merhaba");
     help.bodyPiece();
     help.createTitle("Merhaba");
     help.headTags();
