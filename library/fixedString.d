@@ -1,6 +1,6 @@
 module library.fixedString;
 
-import std.string;
+import std.array;
 import std.uri;
 
 /*
@@ -23,10 +23,9 @@ string[string] forGetAndPost(string input)
     string[][] fixedInput2;
 
     foreach (fixedInput;fixedInput1) {
-
         fixedInput2 ~= split(fixedInput,"=");        
-        
     }
+    
     
     for (int a=0; a < fixedInput1.length ; ++a) {
         for (int b = 1; b < fixedInput2[a].length; ++b) {
@@ -35,8 +34,12 @@ string[string] forGetAndPost(string input)
         }                
     }
     
+    
     return endInput;
+
 }
+
+
 unittest
 {
     string[string] deneme;
@@ -60,12 +63,14 @@ string[string] forCookie(string input)
         fixedInput2 ~= split(fixedInput,"=");        
     }
     
+    
     for (int a = 0; a < fixedInput1.length; ++a) {
         for (int b=1; b < fixedInput2[a].length; ++b) {
             //endInput[fixedInput2[a][0]]~=fixedInput2[a][b+1];
             endInput[fixedInput2[a][0]] ~= fixedInput2[a][b];
         }                
     }
+    
     
     return endInput;
 }
