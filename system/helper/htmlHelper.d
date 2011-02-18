@@ -13,16 +13,22 @@ class HtmlHelper
         this.head=[];
 
     }
+
+    void createCode(){
+
+        writeln(content);
+
+    }
   
     void htmlTags(){
   
-        content="<html>\n"~content~"</html\n";
+        content="<html>\n"~content~"</html>\n";
 
     }
 
     void headTags(){
         
-        content~="<head>\n"~head~"</head>\n";
+        content="<head>\n"~head~"</head>\n"~content;
 
     }
 
@@ -59,15 +65,15 @@ class HtmlHelper
 
     }
 
-    void paragraph(string metin){
+    void paragraph(string text){
 
-        content~="<p>"~metin~"</p>\n";
+        content~="<p>"~text~"</p>\n";
 
     }
 
-    void bolder(string metin){
+    void bolder(string text){
   
-        content~="<b>"~metin~"</b>\n";
+        content~="<b>"~text~"</b>\n";
 
     }
 
@@ -89,18 +95,93 @@ class HtmlHelper
 
     }
 
+    void bigger(string text){
+    
+        content~="<big>"~text~"</big>\n";
+
+    }
+
+    void emphasized(string text){
+
+        content~="<em>"~text~"</em>\n";
+
+    }
+
+    void italic(string text){
+
+        content~="<i>"~text~"</i>\n";
+
+    }
+
+    void smaller(string text){
+
+        content~="<small>"~text~"</small>\n";
+
+    }
+
+    void stronger(string text){
+
+        content~="<strong>"~text~"</strong>\n";
+
+    }
+
+    void subscripted(string text){
+
+        content~="<sub>"~text~"</sub>\n";
+
+    }
+
+    void superscripted(string text){
+ 
+        content~="<sup>"~text~"</sup>\n";
+
+    }
+
+    void inserted(string text){
+
+        content~="<ins>"~text~"</ins>\n";
+
+    }
+
+    void deleted(string text){
+
+        content~="<del>"~text~"</del>\n";
+
+    }
+
+    void definitionTerm(string text){
+
+        content~="<dfn>"~text~"</dfn>\n";
+
+    }
+
+    void codeStyle(string text){
+
+        content~="<code>"~text~"</code>\n";
+
+    }
+
 }
 
 unittest
 {
     HtmlHelper help=new HtmlHelper();
     help.downLine();
-    //help.header(1,"Merhaba");
+    help.header(1,"Merhaba");
     help.paragraph("Merhaba");
     help.bolder("Merhaba");
+    help.bigger("Merhaba");
+    help.emphasized("Merhaba");
+    help.italic("Merhaba");
+    help.smaller("Merhaba");
+    help.stronger("Merhaba");
+    help.subscripted("Merhaba");
+    help.superscripted("Merhaba");
+    help.inserted("Merhaba");
+    help.deleted("Merhaba");
     help.bodyPiece();
-    help.htmlTags();
     help.createTitle("Merhaba");
     help.headTags();
-    writeln(help.content);
+    help.htmlTags();
+    help.createCode();
 }
