@@ -1,4 +1,4 @@
-module helper;
+module system.helper.htmlHelper;
 import std.stdio;
 import std.conv;
 class HtmlHelper
@@ -44,7 +44,7 @@ class HtmlHelper
 
     }
 
-    void header(int level,string text){
+    void header(int level,const char[] text){
 
         switch(level){
         case 1: content~="<h1>"~text~"</h1>\n"; break;
@@ -65,13 +65,13 @@ class HtmlHelper
 
     }
 
-    void paragraph(string text){
+    void paragraph(const char[] text){
 
         content~="<p>"~text~"</p>\n";
 
     }
 
-    void bolder(string text){
+    void bolder(const char[] text){
   
         content~="<b>"~text~"</b>\n";
 
@@ -83,79 +83,79 @@ class HtmlHelper
 
     }
 
-    void createLink(string address,string name){
+    void createLink(const char[] address,const char[] name){
     
         content~="<a href=\""~address~"\">"~name~"</a>\n";
 
     }
 
-    void createComment(string comment){
+    void createComment(const char[] comment){
 
         content~="<!--"~comment~"-->\n";
 
     }
 
-    void bigger(string text){
+    void bigger(const char[] text){
     
         content~="<big>"~text~"</big>\n";
 
     }
 
-    void emphasized(string text){
+    void emphasized(const char[] text){
 
         content~="<em>"~text~"</em>\n";
 
     }
 
-    void italic(string text){
+    void italic(const char[] text){
 
         content~="<i>"~text~"</i>\n";
 
     }
 
-    void smaller(string text){
+    void smaller(const char[] text){
 
         content~="<small>"~text~"</small>\n";
 
     }
 
-    void stronger(string text){
+    void stronger(const char[] text){
 
         content~="<strong>"~text~"</strong>\n";
 
     }
 
-    void subscripted(string text){
+    void subscripted(const char[] text){
 
         content~="<sub>"~text~"</sub>\n";
 
     }
 
-    void superscripted(string text){
+    void superscripted(const char[] text){
  
         content~="<sup>"~text~"</sup>\n";
 
     }
 
-    void inserted(string text){
+    void inserted(const char[] text){
 
         content~="<ins>"~text~"</ins>\n";
 
     }
 
-    void deleted(string text){
+    void deleted(const char[] text){
 
         content~="<del>"~text~"</del>\n";
 
     }
 
-    void definitionTerm(string text){
+    void definitionTerm(const char[] text){
 
         content~="<dfn>"~text~"</dfn>\n";
 
     }
 
-    void codeStyle(string text){
+    void codeStyle(const char[] text){
 
         content~="<code>"~text~"</code>\n";
 
