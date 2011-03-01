@@ -1,236 +1,250 @@
-module helper;
+module system.helper.htmlHelper;
 import std.stdio;
 import std.conv;
 class HtmlHelper
 {
 
-    char[] content;
-    char[] head;    
+    char[] bodyPiece;
+    char[] head;
+    char[] code;   
+
 
     this(){
 
-        this.content=[]; 
+        this.bodyPiece=[]; 
         this.head=[];
+        this.code=[];
 
     }
 
-    void createCode(){
+    void saveInFile(string fileName){
 
-        writeln(content);
+        File saved=File(fileName,"a");
 
-    }
-  
-    void htmlTags(){
-  
-        content="<html>\n"~content~"</html>\n";
+        saved.write(code);
 
     }
 
-    void headTags(){
+    void createBody(string[] functions ... ){
+
+        foreach(i;functions){
+
+            bodyPiece~=i;
+
+        }
+
+        bodyPiece="<body>\n"~bodyPiece~"</body>\n";
+
+    }
+
+    void createHead(string[] functions ... ){
+
+        foreach(i;functions){
+
+            head~=i;
+
+        }
+
+        head="<head>"~head~"</head\n";
+
+    }
+
+    void finishCode(){
+
+        code="<html>\n"~head~bodyPiece~"</html>";
+
+    }
+
         
-        content="<head>\n"~head~"</head>\n"~content;
 
-    }
-
-    void createTitle(const char[] title){
+    string createTitle(const char[] title){
   
-        head~="<title>"~to!string(title)~"</title>\n";
+        return "<title>"~to!string(title)~"</title>\n";
 
     }
 
-    void bodyPiece(){
-    
-        content="<body>\n"~content~"</body>\n";
 
-    }
-
-    void header(int level,string text){
+    string header(int level,string text){
 
         switch(level){
-        case 1: content~="<h1>"~text~"</h1>\n"; break;
-        case 2: content~="<h2>"~text~"</h2>\n"; break;
-        case 3: content~="<h3>"~text~"</h3>\n"; break;
-        case 4: content~="<h4>"~text~"</h4>\n"; break;
-        case 5: content~="<h5>"~text~"</h5>\n"; break;
-        case 6: content~="<h6>"~text~"</h6>\n"; break;
-        default:;
+        case 1: return "<h1>"~text~"</h1>\n";
+        case 2: return "<h2>"~text~"</h2>\n";
+        case 3: return "<h3>"~text~"</h3>\n";
+        case 4: return "<h4>"~text~"</h4>\n";
+        case 5: return "<h5>"~text~"</h5>\n";
+        case 6: return "<h6>"~text~"</h6>\n";
+        default:return "ERROR" ; //It is not a solving.It must change.
     
         }
 
     }
 
-    void downLine(){
+    string downLine(){
 
-        content~="<br />\n";
-
-    }
-
-    void paragraph(string text){
-
-        content~="<p>"~text~"</p>\n";
+        return "<br />\n";
 
     }
 
-    void bolder(string text){
+    string paragraph(string text){
+
+        return "<p>"~text~"</p>\n";
+
+    }
+
+    string bolder(string text){
   
-        content~="<b>"~text~"</b>\n";
+        return "<b>"~text~"</b>\n";
 
     }
 
-    void createTable(){
-
-        content~="<table>";
-
-    }
-
-    void createLink(string address,string name){
+    string createLink(string address,string name){
     
-        content~="<a href=\""~address~"\">"~name~"</a>\n";
+        return "<a href=\""~address~"\">"~name~"</a>\n";
 
     }
 
-    void createComment(string comment){
+    string createComment(string comment){
 
-        content~="<!--"~comment~"-->\n";
+        return "<!--"~comment~"-->\n";
 
     }
 
-    void bigger(string text){
+    string bigger(string text){
     
-        content~="<big>"~text~"</big>\n";
+        return "<big>"~text~"</big>\n";
 
     }
 
-    void emphasized(string text){
+    string emphasized(string text){
 
-        content~="<em>"~text~"</em>\n";
-
-    }
-
-    void italic(string text){
-
-        content~="<i>"~text~"</i>\n";
+        return "<em>"~text~"</em>\n";
 
     }
 
-    void smaller(string text){
+    string italic(string text){
 
-        content~="<small>"~text~"</small>\n";
-
-    }
-
-    void stronger(string text){
-
-        content~="<strong>"~text~"</strong>\n";
+        return "<i>"~text~"</i>\n";
 
     }
 
-    void subscripted(string text){
+    string smaller(string text){
 
-        content~="<sub>"~text~"</sub>\n";
+        return "<small>"~text~"</small>\n";
 
     }
 
-    void superscripted(string text){
+    string stronger(string text){
+
+        return "<strong>"~text~"</strong>\n";
+
+    }
+
+    string subscripted(string text){
+
+        return "<sub>"~text~"</sub>\n";
+
+    }
+
+    string superscripted(string text){
  
-        content~="<sup>"~text~"</sup>\n";
+        return "<sup>"~text~"</sup>\n";
 
     }
 
-    void inserted(string text){
+    string inserted(string text){
 
-        content~="<ins>"~text~"</ins>\n";
-
-    }
-
-    void deleted(string text){
-
-        content~="<del>"~text~"</del>\n";
+        return "<ins>"~text~"</ins>\n";
 
     }
 
-    void definitionTerm(string text){
+    string deleted(string text){
 
-        content~="<dfn>"~text~"</dfn>\n";
-
-    }
-
-    void codeStyle(string text){
-
-        content~="<code>"~text~"</code>\n";
+        return "<del>"~text~"</del>\n";
 
     }
 
-    void keyboardText(string text){
+    string definitionTerm(string text){
 
-        content~="<kbd>"~text~"</kbd>\n";
+        return "<dfn>"~text~"</dfn>\n";
 
     }
 
-    void sample(string text){
+    string codeStyle(string text){
+
+        return "<code>"~text~"</code>\n";
+
+    }
+
+    string keyboardText(string text){
+
+        return "<kbd>"~text~"</kbd>\n";
+
+    }
+
+    string sample(string text){
   
-        content~="<samp>"~text~"</samp>\n";
+        return "<samp>"~text~"</samp>\n";
 
     }
 
-    void teleType(string text){
+    string teleType(string text){
 
-        content~="<tt>"~text~"</tt>\n";
+        return "<tt>"~text~"</tt>\n";
  
     }
 
-    void variable(string text){
+    string variable(string text){
 
-        content~="<var>"~text~"</var>\n";
-
-    }
-
-    void preformatted(string text){
-
-        content~="<pre>"~text~"</pre>\n";
+        return "<var>"~text~"</var>\n";
 
     }
 
-    void abbreviated(string text,string longer){
+    string preformatted(string text){
 
-        content~="<abbr title="~longer~">"~text~"</abbr>\n";
-
-    }
-
-    void acronym(string headCharacters,string text){
-
-        content~="<acronym title="~text~">"~headCharacters~"</acronym>\n";
+        return "<pre>"~text~"</pre>\n";
 
     }
 
-    void bidirectional(int direction,string text){
+    string abbreviated(string text,string longer){
+
+        return "<abbr title="~longer~">"~text~"</abbr>\n";
+
+    }
+
+    string acronym(string headCharacters,string text){
+
+        return "<acronym title="~text~">"~headCharacters~"</acronym>\n";
+
+    }
+
+    string bidirectional(int direction,string text){
 
         if(direction==0){
  
-            content~="<bdo dir=\"rtl\">"~text~"</bdo>\n";
+            return "<bdo dir=\"rtl\">"~text~"</bdo>\n";
 
         }else{
 
-            content~="<bo dir=\"ltr\">"~text~"</bdo>\n";
+            return "<bo dir=\"ltr\">"~text~"</bdo>\n";
 
         }
     }
 
-    void longQuote(string text){
+    string longQuote(string text){
 
-        content~="<blockquote>"~text~"</blockquote>\n";
-
-    }
-
-    void shortQuote(string text){
-
-        content~="<q>"~text~"</q>\n";
+        return "<blockquote>"~text~"</blockquote>\n";
 
     }
 
-    void citation(string text){
+    string shortQuote(string text){
 
-        content~="<cite>"~text~"</cite>\n";
+        return "<q>"~text~"</q>\n";
+
+    }
+
+    string citation(string text){
+
+        return "<cite>"~text~"</cite>\n";
 
     }
 
@@ -239,33 +253,36 @@ class HtmlHelper
 unittest
 {
     HtmlHelper help=new HtmlHelper();
-    help.downLine();
-    help.header(1,"Merhaba");
-    help.paragraph("Merhaba");
-    help.bolder("Merhaba");
-    help.bigger("Merhaba");
-    help.emphasized("Merhaba");
-    help.italic("Merhaba");
-    help.smaller("Merhaba");
-    help.stronger("Merhaba");
-    help.subscripted("Merhaba");
-    help.superscripted("Merhaba");
-    help.inserted("Merhaba");
-    help.deleted("Merhaba");
-    help.keyboardText("Merhaba");
-    help.sample("Merhaba");
-    help.teleType("Merhaba");
-    help.variable("Merhaba");
-    help.preformatted("Merhaba");
-    help.abbreviated("Mrb","Merhaba");
-    help.acronym("MD","Merhaba D");
-    help.bidirectional(0,"Merhaba");
-    help.longQuote("Merhaba");
-    help.shortQuote("Merhaba");
-    help.citation("Merhaba");
-    help.bodyPiece();
-    help.createTitle("Merhaba");
-    help.headTags();
-    help.htmlTags();
-    help.createCode();
+    help.createBody(
+        help.downLine(),
+        help.header(1,"Merhaba"),
+        help.paragraph("Merhaba"),
+        help.bolder("Merhaba"),
+        help.bigger("Merhaba"),
+        help.emphasized("Merhaba"),
+        help.italic("Merhaba"),
+        help.smaller("Merhaba"),
+        help.stronger("Merhaba"),
+        help.subscripted("Merhaba"),
+        help.superscripted("Merhaba"),
+        help.inserted("Merhaba"),
+        help.deleted("Merhaba"),
+        help.keyboardText("Merhaba"),
+        help.sample("Merhaba"),
+        help.teleType("Merhaba"),
+        help.variable("Merhaba"),
+        help.preformatted("Merhaba"),
+        help.abbreviated("Mrb","Merhaba"),
+        help.acronym("MD","Merhaba D"),
+        help.bidirectional(0,"Merhaba"),
+        help.longQuote("Merhaba"),
+        help.shortQuote("Merhaba"),
+        help.citation("Merhaba"),
+    );
+    help.createHead(
+        help.createTitle("Merhaba"),
+    );
+    help.finishCode();
+    write(help.code);
+    help.saveInFile("merhaba.html");
 }
