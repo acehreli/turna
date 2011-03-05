@@ -1,6 +1,9 @@
 module system.helper.htmlHelper;
 import std.stdio;
 import std.conv;
+
+enum direction{right,left};
+
 class HtmlHelper
 {
 
@@ -45,13 +48,13 @@ class HtmlHelper
 
         }
 
-        head="<head>"~head~"</head\n";
+        head="<head>\n"~head~"</head\n";
 
     }
 
     void finishCode(){
 
-        code="<html>\n"~head~bodyPiece~"</html>";
+        code="<html>\n"~head~bodyPiece~"</html>\n";
 
     }
 
@@ -217,17 +220,20 @@ class HtmlHelper
 
     }
 
-    string bidirectional(int direction,string text){
+    string bidirectional(direction direction,string text){
 
-        if(direction==0){
+        final switch(direction){
+
+            case direction.left:
  
-            return "<bdo dir=\"rtl\">"~text~"</bdo>\n";
+                  return "<bdo dir=\"ltr\">"~text~"</bdo>\n";
 
-        }else{
+            case direction.right:
 
-            return "<bo dir=\"ltr\">"~text~"</bdo>\n";
+                  return "<bdo dir=\"rtl\">"~text~"</bdo>\n";
 
-        }
+       }
+
     }
 
     string longQuote(string text){
@@ -253,36 +259,28 @@ class HtmlHelper
 unittest
 {
     HtmlHelper help=new HtmlHelper();
-    help.createBody(
-        help.downLine(),
-        help.header(1,"Merhaba"),
-        help.paragraph("Merhaba"),
-        help.bolder("Merhaba"),
-        help.bigger("Merhaba"),
-        help.emphasized("Merhaba"),
-        help.italic("Merhaba"),
-        help.smaller("Merhaba"),
-        help.stronger("Merhaba"),
-        help.subscripted("Merhaba"),
-        help.superscripted("Merhaba"),
-        help.inserted("Merhaba"),
-        help.deleted("Merhaba"),
-        help.keyboardText("Merhaba"),
-        help.sample("Merhaba"),
-        help.teleType("Merhaba"),
-        help.variable("Merhaba"),
-        help.preformatted("Merhaba"),
-        help.abbreviated("Mrb","Merhaba"),
-        help.acronym("MD","Merhaba D"),
-        help.bidirectional(0,"Merhaba"),
-        help.longQuote("Merhaba"),
-        help.shortQuote("Merhaba"),
-        help.citation("Merhaba"),
-    );
-    help.createHead(
-        help.createTitle("Merhaba"),
-    );
-    help.finishCode();
-    write(help.code);
-    help.saveInFile("merhaba.html");
+    assert(help.downLine()=="<br />\n");
+    assert(help.header(1,"Merhaba")=="<h1>Merhaba</h1>\n");
+    assert(help.paragraph("Merhaba")=="<p>Merhaba</p>\n");
+    assert(help.bolder("Merhaba")=="<b>Merhaba</b>\n");
+    assert(help.bigger("Merhaba")=="<big>Merhaba</big>\n");
+    assert(help.emphasized("Merhaba")=="<em>Merhaba</em>\n");
+    assert(help.italic("Merhaba")=="<i>Merhaba</i>\n");
+    assert(help.smaller("Merhaba")=="<small>Merhaba</small>\n");
+    assert(help.stronger("Merhaba")=="<strong>Merhaba</strong>\n");
+    assert(help.subscripted("Merhaba")=="<sub>Merhaba</sub>\n");
+    assert(help.superscripted("Merhaba")=="<sup>Merhaba</sup>\n");
+    assert(help.inserted("Merhaba")=="<ins>Merhaba</ins>\n");
+    assert(help.deleted("Merhaba")=="<del>Merhaba</del>\n");
+    assert(help.keyboardText("Merhaba")=="<kbd>Merhaba</kbd>\n");
+    assert(help.sample("Merhaba")=="<samp>Merhaba</samp>\n");
+    assert(help.teleType("Merhaba")=="<tt>Merhaba</tt>\n");
+    assert(help.variable("Merhaba")=="<var>Merhaba</var>\n");
+    assert(help.preformatted("Merhaba")=="<pre>Merhaba</pre>\n");
+    assert(help.abbreviated("Mrb","Merhaba")=="<abbr title=Merhaba>Mrb</abbr>\n");
+    assert(help.acronym("MD","Merhaba D")=="<acronym title=Merhaba D>MD</acronym>\n");
+    assert(help.bidirectional(direction.right,"Merhaba")=="<bdo dir=\"rtl\">Merhaba</bdo>\n");
+    assert(help.longQuote("Merhaba")=="<blockquote>Merhaba</blockquote>\n");
+    assert(help.shortQuote("Merhaba")=="<q>Merhaba</q>\n");
+    assert(help.citation("Merhaba")=="<cite>Merhaba</cite>\n");
 }
