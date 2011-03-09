@@ -13,7 +13,7 @@ string createXml(string name , string value)
 
     string createTitle(const char[] title)
     {
-       return createXml("title", to!string(title));
+       return createXml("title", to!string( title ) );
     }
 
     string downLine()
