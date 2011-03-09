@@ -6,14 +6,14 @@ import std.conv;
 enum Direction { right, left }
 
 
-    string createXml(string name,string value)
-    {
-        return "<"~name~">"~value~"</"~name~">\n";
-    }
+string createXml(string name , string value)
+{
+    return "<" ~ name ~ ">" ~ value ~ "</" ~ name ~ ">\n";
+}
 
     string createTitle(const char[] title)
     {
-       return createXml("title",to!string(title));
+       return createXml("title", to!string(title));
     }
 
     string downLine()
@@ -23,12 +23,12 @@ enum Direction { right, left }
 
     string paragraph(string text)
     {
-        return createXml("p",text);
+        return createXml("p", text);
     }
 
     string bolder(string text)
     {
-        return createXml("b",text);
+        return createXml("b", text);
     }
 
     string createLink(string address, string name)
@@ -38,67 +38,67 @@ enum Direction { right, left }
 
     string createComment(string comment)
     {
-        return createXml("!--",comment);
+        return "<!--" ~ comment ~ "--!";
     }
 
     string bigger(string text)
     {
-        return createXml("big",text);
+        return createXml("big", text);
     }
 
     string emphasized(string text)
     {
-        return createXml("em",text);
+        return createXml("em", text);
     }
 
     string italic(string text)
     {
-        return createXml("i",text);
+        return createXml("i", text);
     }
 
     string smaller(string text)
     {
-        return createXml("small",text);
+        return createXml("small", text);
     }
 
     string stronger(string text)
     {
-        return createXml("strong",text);
+        return createXml("strong", text);
     }
 
     string subscripted(string text)
     {
-        return createXml("sub",text);
+        return createXml("sub", text);
     }
 
     string superscripted(string text)
     {
-        return createXml("sup",text);
+        return createXml("sup", text);
     }
 
     string inserted(string text)
     {
-        return createXml("ins",text);
+        return createXml("ins", text);
     }
 
     string deleted(string text)
     {
-        return createXml("del",text);
+        return createXml("del", text);
     }
 
     string definitionTerm(string text)
     {
-        return createXml("dfn",text);
+        return createXml("dfn", text);
     }
 
     string codeStyle(string text)
     {
-        return createXml("code",text);
+        return createXml("code", text);
     }
 
     string keyboardText(string text)
     {
-        return createXml("kbd",text);
+        return createXml("kbd", text);
     }
 
     string sample(string text)
@@ -108,17 +108,17 @@ enum Direction { right, left }
 
     string teleType(string text)
     {
-        return createXml("tt",text);
+        return createXml("tt", text);
     }
 
     string variable(string text)
     {
-        return createXml("var",text);
+        return createXml("var", text);
     }
 
     string preformatted(string text)
     {
-        return createXml("pre",text);
+        return createXml("pre", text);
     }
 
     string abbreviated(string text, string longer)
@@ -144,17 +144,17 @@ enum Direction { right, left }
 
     string longQuote(string text)
     {
-        return createXml("blockquote",text);
+        return createXml("blockquote", text);
     }
 
     string shortQuote(string text)
     {
-        return createXml("q",text);
+        return createXml("q", text);
     }
 
     string citation(string text)
     {
-        return createXml("cite",text);
+        return createXml("cite", text);
     }
 
 class HtmlHelper
@@ -185,7 +185,7 @@ class HtmlHelper
             bodyPiece ~= i;
         }
 
-        bodyPiece = "<body>"~bodyPiece~"</body>";
+        bodyPiece = "<body>" ~ bodyPiece ~ "</body>";
     }
 
     void createHead(string[] pieces ... )
@@ -194,7 +194,7 @@ class HtmlHelper
             head ~= i;
         }
 
-        head = "<head>"~head~"</head>";
+        head = "<head>" ~ head ~ "</head>";
     }
 
     void finishCode()
