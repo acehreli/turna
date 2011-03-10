@@ -5,6 +5,10 @@ import std.conv;
 
 enum Direction { right, left }
 
+enum Link { inPage, newPage }
+
+enum Lists { ordered, unOrdered }
+
 
 string createXml(string name , string value)
 {
@@ -31,9 +35,19 @@ string createXml(string name , string value)
         return createXml("b", text);
     }
 
-    string createLink(string address, string name)
+    string createLink(Link link, string address, string name)
     {
-        return "<a href=\"" ~ address ~ "\">" ~ name ~ "</a>\n";
+        final switch( link ){
+ 
+            case link.inPage:
+
+                return "<a name="~address~">"~name~"</a>";
+
+            case link.newPage:
+
+                return "<a href="~address~">"~name~"</a>";
+        }
+
     }
 
     string createComment(string comment)
@@ -133,7 +147,7 @@ string createXml(string name , string value)
 
     string bidirectional(Direction direction, string text)
     {
-        final switch(direction) {
+        final switch( direction ) {
             case Direction.left:
                   return "<bdo dir=\"ltr\">" ~ text ~ "</bdo>\n";
 
@@ -155,6 +169,22 @@ string createXml(string name , string value)
     string citation(string text)
     {
         return createXml("cite", text);
+    }
+
+    string createList(Lists type, string[] matter ... )
+    {
+        char[] listCode;
+        string returnCode;
+        foreach(i; matter ){
+                listCode ~= createXml("li", to!string( i ) );
+            }
+        final switch( type ) {
+            case Lists.ordered:
+                returnCode = createXml("ol", to!string( listCode ) ); break ;
+            case Lists.unOrdered:
+                returnCode = createXml("ul", to!string( listCode ) ); break ;
+        }
+        return returnCode;
     }
 
 class HtmlHelper
@@ -206,8 +236,11 @@ class HtmlHelper
 
 unittest
 {
-    HtmlHelper help = new HtmlHelper();
     assert(downLine() == "<br />\n");
+    assert(createLink(Link.inPage, "forum", "ddili" )
+           =="<a name=forum>ddili</a>");
+    assert(createLink(Link.newPage, "forum", "ddili" )
+           =="<a href=forum>ddili</a>");
     assert(paragraph("Merhaba") == "<p>Merhaba</p>\n");
     assert(bolder("Merhaba") == "<b>Merhaba</b>\n");
     assert(bigger("Merhaba") == "<big>Merhaba</big>\n");
@@ -233,4 +266,6 @@ unittest
     assert(longQuote("Merhaba") == "<blockquote>Merhaba</blockquote>\n");
     assert(shortQuote("Merhaba") == "<q>Merhaba</q>\n");
     assert(citation("Merhaba") == "<cite>Merhaba</cite>\n");
+    assert(createList(Lists.ordered, "Merhaba" )
+           == "<ol><li>Merhaba</li>\n</ol>\n");
 }
