@@ -9,183 +9,187 @@ enum Link { inPage, newPage }
 
 enum Lists { ordered, unOrdered }
 
-
 string createXml(string name , string value)
 {
     return "<" ~ name ~ ">" ~ value ~ "</" ~ name ~ ">\n";
 }
 
-    string createTitle(const char[] title)
-    {
-       return createXml("title", to!string( title ) );
+string createTitle(const char[] title)
+{
+    return createXml("title", to!string(title));
+}
+
+string downLine()
+{
+    return "<br />\n";
+}
+
+string paragraph(string text)
+{
+    return createXml("p", text);
+}
+
+string bolder(string text)
+{
+    return createXml("b", text);
+}
+
+string createLink(Link link, string address, string name)
+{
+    final switch (link) {
+
+    case link.inPage:
+
+        return "<a name=" ~ address ~ ">" ~ name ~ "</a>";
+
+    case link.newPage:
+
+        return "<a href=" ~ address ~ ">" ~ name ~ "</a>";
+    }
+}
+
+string createComment(string comment)
+{
+    return "<!--" ~ comment ~ "--!";
+}
+
+string bigger(string text)
+{
+    return createXml("big", text);
+}
+
+string emphasized(string text)
+{
+    return createXml("em", text);
+}
+
+string italic(string text)
+{
+    return createXml("i", text);
+}
+
+string smaller(string text)
+{
+    return createXml("small", text);
+}
+
+string stronger(string text)
+{
+    return createXml("strong", text);
+}
+
+string subscripted(string text)
+{
+    return createXml("sub", text);
+}
+
+string superscripted(string text)
+{
+    return createXml("sup", text);
+}
+
+string inserted(string text)
+{
+    return createXml("ins", text);
+}
+
+string deleted(string text)
+{
+    return createXml("del", text);
+}
+
+string definitionTerm(string text)
+{
+    return createXml("dfn", text);
+}
+
+string codeStyle(string text)
+{
+    return createXml("code", text);
+}
+
+string keyboardText(string text)
+{
+    return createXml("kbd", text);
+}
+
+string sample(string text)
+{
+    return "<samp>" ~ text ~ "</samp>\n";
+}
+
+string teleType(string text)
+{
+    return createXml("tt", text);
+}
+
+string variable(string text)
+{
+    return createXml("var", text);
+}
+
+string preformatted(string text)
+{
+    return createXml("pre", text);
+}
+
+string abbreviated(string text, string longer)
+{
+    return "<abbr title=" ~ longer ~ ">" ~ text ~ "</abbr>\n";
+}
+
+string acronym(string headCharacters, string text)
+{
+    return "<acronym title=" ~ text ~ ">" ~ headCharacters ~ "</acronym>\n";
+}
+
+string bidirectional(Direction direction, string text)
+{
+    final switch (direction) {
+    case Direction.left:
+        return "<bdo dir=\"ltr\">" ~ text ~ "</bdo>\n";
+
+    case Direction.right:
+        return "<bdo dir=\"rtl\">" ~ text ~ "</bdo>\n";
+    }
+}
+
+string longQuote(string text)
+{
+    return createXml("blockquote", text);
+}
+
+string shortQuote(string text)
+{
+    return createXml("q", text);
+}
+
+string citation(string text)
+{
+    return createXml("cite", text);
+}
+
+string createList(Lists type, string[] matter ...)
+{
+    char[] listCode;
+    string returnCode;
+
+    foreach (i; matter) {
+        listCode ~= createXml("li", to!string(i));
     }
 
-    string downLine()
-    {
-        return "<br />\n";
+    final switch (type) {
+    case Lists.ordered:
+        returnCode = createXml("ol", to!string(listCode));
+        break;
+
+    case Lists.unOrdered:
+        returnCode = createXml("ul", to!string(listCode));
+        break;
     }
 
-    string paragraph(string text)
-    {
-        return createXml("p", text);
-    }
-
-    string bolder(string text)
-    {
-        return createXml("b", text);
-    }
-
-    string createLink(Link link, string address, string name)
-    {
-        final switch( link ){
- 
-            case link.inPage:
-
-                return "<a name="~address~">"~name~"</a>";
-
-            case link.newPage:
-
-                return "<a href="~address~">"~name~"</a>";
-        }
-
-    }
-
-    string createComment(string comment)
-    {
-        return "<!--" ~ comment ~ "--!";
-    }
-
-    string bigger(string text)
-    {
-        return createXml("big", text);
-    }
-
-    string emphasized(string text)
-    {
-        return createXml("em", text);
-    }
-
-    string italic(string text)
-    {
-        return createXml("i", text);
-    }
-
-    string smaller(string text)
-    {
-        return createXml("small", text);
-    }
-
-    string stronger(string text)
-    {
-        return createXml("strong", text);
-    }
-
-    string subscripted(string text)
-    {
-        return createXml("sub", text);
-    }
-
-    string superscripted(string text)
-    {
-        return createXml("sup", text);
-    }
-
-    string inserted(string text)
-    {
-        return createXml("ins", text);
-    }
-
-    string deleted(string text)
-    {
-        return createXml("del", text);
-    }
-
-    string definitionTerm(string text)
-    {
-        return createXml("dfn", text);
-    }
-
-    string codeStyle(string text)
-    {
-        return createXml("code", text);
-    }
-
-    string keyboardText(string text)
-    {
-        return createXml("kbd", text);
-    }
-
-    string sample(string text)
-    {
-        return "<samp>" ~ text ~ "</samp>\n";
-    }
-
-    string teleType(string text)
-    {
-        return createXml("tt", text);
-    }
-
-    string variable(string text)
-    {
-        return createXml("var", text);
-    }
-
-    string preformatted(string text)
-    {
-        return createXml("pre", text);
-    }
-
-    string abbreviated(string text, string longer)
-    {
-        return "<abbr title=" ~ longer ~ ">" ~ text ~ "</abbr>\n";
-    }
-
-    string acronym(string headCharacters, string text)
-    {
-        return "<acronym title=" ~ text ~ ">" ~ headCharacters ~ "</acronym>\n";
-    }
-
-    string bidirectional(Direction direction, string text)
-    {
-        final switch( direction ) {
-            case Direction.left:
-                  return "<bdo dir=\"ltr\">" ~ text ~ "</bdo>\n";
-
-            case Direction.right:
-                  return "<bdo dir=\"rtl\">" ~ text ~ "</bdo>\n";
-       }
-    }
-
-    string longQuote(string text)
-    {
-        return createXml("blockquote", text);
-    }
-
-    string shortQuote(string text)
-    {
-        return createXml("q", text);
-    }
-
-    string citation(string text)
-    {
-        return createXml("cite", text);
-    }
-
-    string createList(Lists type, string[] matter ... )
-    {
-        char[] listCode;
-        string returnCode;
-        foreach(i; matter ){
-                listCode ~= createXml("li", to!string( i ) );
-            }
-        final switch( type ) {
-            case Lists.ordered:
-                returnCode = createXml("ol", to!string( listCode ) ); break ;
-            case Lists.unOrdered:
-                returnCode = createXml("ul", to!string( listCode ) ); break ;
-        }
-        return returnCode;
-    }
+    return returnCode;
+}
 
 class HtmlHelper
 {
@@ -202,25 +206,25 @@ class HtmlHelper
         this.i=[];
     }
 
+    // Warning: If file exists, this function removes the file
     void saveInFile(string fileName)
     {
-        File saved = File(fileName, "w"); //Warning:If file exists,this function removes the file
+        File saved = File(fileName, "w");
         saved.write(code);
     }
 
-    void createBody(string[] pieces ... )
+    void createBody(string[] pieces ...)
     {
-
-        foreach(i; pieces) {
+        foreach (i; pieces) {
             bodyPiece ~= i;
         }
 
         bodyPiece = "<body>" ~ bodyPiece ~ "</body>";
     }
 
-    void createHead(string[] pieces ... )
+    void createHead(string[] pieces ...)
     {
-        foreach(i; pieces) {
+        foreach (i; pieces) {
             head ~= i;
         }
 
@@ -231,7 +235,6 @@ class HtmlHelper
     {
         code = "<html>\n" ~ head ~ bodyPiece ~ "</html>\n";
     }
-
 }
 
 unittest
