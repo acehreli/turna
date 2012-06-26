@@ -26,21 +26,17 @@ string[string] get()
     return resultGet;
 }
 
-/*
- * BUG:
- *
- * post is very slow. Because we used the "~=" operator for the firstPost
- * variable.
- *
- *
- * */
+
 string[string] post()
 {
     string[string] resultPost;
+    int lengthOfPost = to!int(contentLength);
     char[] firstPost;
-
-    while (firstPost.length < to!int(getenv("CONTENT_LENGTH"))) {
-        firstPost ~= din.getc;
+	firstPost.length = lengthOfPost;
+	int counter;
+    while (counter < lengthOfPost) {
+        firstPost[counter] = din.getc;
+		++counter;
     }
 
     resultPost = forGetAndPost(to!(string)(firstPost));
